@@ -1,0 +1,31 @@
+<html ng-app>
+<head>
+  <title>Angular Fiddle</title>
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+</head>
+<body ng-controller="MainCtrl">
+
+<div class="container">
+  <input type="text" value="{{gist_url}}" style="width:100%;">
+
+  <div ng-repeat="file in files">
+    <h2 ng-bind="file.filename"></h2>
+    <pre ng-bind="file.content"></pre>
+  </div>
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js"></script>
+<script>
+  function MainCtrl($scope, $http){
+
+    $http.get('https://api.github.com/gists/8961251').then(function(res){
+      console.log(res.data);
+      $scope.gist_url = res.data.html_url
+      $scope.files = res.data.files;
+
+    });
+  };
+</script>
+</body>
+</html>
