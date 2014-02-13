@@ -24,35 +24,40 @@ angular.module('fiddleApp')
           mergedIndexHtml: mergedIndexHtml
         };
     })
+    .directive('iframeResult', function() {
+        return {
+            restrict: 'E',
+            scope: { content: '=' },
+            link: function(scope, element) {
+                scope.$watch('content', function(value) {
+                    var doc, iframe = document.createElement("iframe");
+                    iframe.id = "result";
+                    element.html('').append(angular.element(iframe));
+                    if (value) {
+                        if (iframe.contentDocument) doc = iframe.contentDocument;
+                        else if (iframe.contentWindow) doc = iframe.contentWindow.document;
+                        else doc = iframe.document;
+                        doc.open();
+                        doc.writeln(value);
+                        doc.close();
+                    }
+                });
+            }
+        };
+    })
     .controller('MainCtrl', function($scope, Files) {
         $scope.aceLoaded = function(editor) {
-          editor.commands.addCommand({
-              name: "showKeyboardShortcuts",
-              bindKey: {win: "Ctrl-Enter", mac: "Command-Enter"},
-              exec: function(editor) { $scope.execute(); }
-          });
+            editor.commands.addCommand({
+                bindKey: { win: 'Ctrl-Enter', mac: 'Command-Enter' },
+                exec: function(editor) { $scope.execute(); }
+            });
         };
         $scope.fetch = function(){
             Files.loadGist($scope.gistId).then(function(files) {
-              $scope.files = files;
+                $scope.files = files;
             });
         };
         $scope.execute = function () {
-            // TODO: Move this into a directive
-            var currentIframe = document.getElementById('result'),
-            currentParentNode = currentIframe.parentNode;
-            currentIframe.parentNode.removeChild(currentIframe);
-
-            var iframe = document.createElement("iframe");
-            iframe.id = "result";
-            currentParentNode.appendChild(iframe);
-
-            if (iframe.contentDocument) doc = iframe.contentDocument;
-            else if (iframe.contentWindow) doc = iframe.contentWindow.document;
-            else doc = iframe.document;
-
-            doc.open();
-            doc.writeln(Files.mergedIndexHtml());
-            doc.close();
+            $scope.result = Files.mergedIndexHtml();
         };
     });
