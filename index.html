@@ -19,7 +19,15 @@
     </style>
 </head>
 <body ng-controller="MainCtrl">
-
+<p>
+    <button ng-click="gistId=8972289">Primitives</button>
+    <button ng-click="gistId=8973753">Strings</button>
+    <button ng-click="gistId=8975840">Booleans</button>
+    <button ng-click="gistId=8976378">Functions</button>
+    <button ng-click="gistId=8977139">Variable References</button>
+    <button ng-click="gistId=8976835">Variable Names</button>
+    <button ng-click="gistId=8978574">Scopes</button>
+</p>
 <p><input type="text" ng-model="gistId" placeholder="ID of your Gist">
     <button ng-click="fetch()">Fetch</button>
     <button ng-click="execute()">Execute</button>
@@ -51,20 +59,25 @@
 
         $scope.fetch = function(){
             $http.get("https://api.github.com/gists/"+$scope.gistId)
+            //$http.get("data.json")
                     .then(function (res) {
                 //$scope.gist_url = res.data.html_url
                 $scope.files = res.data.files;
 
             });
         };
-
+        // TODO: Remove
+        $scope.fetch();
 
         $scope.execute = function () {
-            document.body.removeChild(document.getElementById('result'));
+            var currentIframe = document.getElementById('result'),
+                    currentParentNode = currentIframe.parentNode;
+            currentIframe.parentNode.removeChild(currentIframe);
 
             var iframe = document.createElement("iframe");
             iframe.id = "result";
-            document.body.appendChild(iframe);
+            currentParentNode.appendChild(iframe);
+
 
 
             if (iframe.contentDocument) doc = iframe.contentDocument;
