@@ -13,7 +13,7 @@
       "language": "HTML",
       "raw_url": "https://gist.github.com/robinboehm/8972289/raw/3356f6383984ed578cb375c49abacf153946ec64/index.html",
       "size": 619,
-      "content": "<!DOCTYPE html>\n<html>\n<head>\n    <title></title>\n    <meta charset=\"utf-8\">\n\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"bower_components/jasmine/lib/jasmine-core/jasmine.css\">\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"stylesheets/jasmine.css\">\n</head>\n<body>\n\n\n<script src=\"bower_components/jasmine/lib/jasmine-core/jasmine.js\"></script>\n<script src=\"bower_components/jasmine/lib/jasmine-core/jasmine-html.js\"></script>\n<script src=\"bower_components/jasmine/lib/jasmine-core/boot.js\"></script>\n\n<!-- App -->\n\n<script src=\"primitives.js\"></script>\n<script src=\"primitives.spec.js\"></script>\n</body>\n</html>"
+      "content": "<!DOCTYPE html>\n<html>\n<head>\n    <title></title>\n    <meta charset=\"utf-8\">\n\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"bower_components/jasmine/lib/jasmine-core/jasmine.css\">\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"css/jasmine.css\">\n</head>\n<body>\n\n\n<script src=\"bower_components/jasmine/lib/jasmine-core/jasmine.js\"></script>\n<script src=\"bower_components/jasmine/lib/jasmine-core/jasmine-html.js\"></script>\n<script src=\"bower_components/jasmine/lib/jasmine-core/boot.js\"></script>\n\n<!-- App -->\n\n<script src=\"primitives.js\"></script>\n<script src=\"primitives.spec.js\"></script>\n</body>\n</html>"
     },
     "primitives.js": {
       "filename": "primitives.js",
