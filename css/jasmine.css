@@ -1,3 +1,17 @@
+.banner{
+    display: none;
+}
+.alert{
+    display: none;
+}
+.description{
+    font-size: 300%;
+    background: none !important;
+}
+.description a{
+    color: black !important;
+
+}
 .failures div:not(:first-child){
     display: none;
 }
