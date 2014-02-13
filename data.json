@@ -1,0 +1,181 @@
+{
+  "url": "https://api.github.com/gists/8972289",
+  "forks_url": "https://api.github.com/gists/8972289/forks",
+  "commits_url": "https://api.github.com/gists/8972289/commits",
+  "id": "8972289",
+  "git_pull_url": "https://gist.github.com/8972289.git",
+  "git_push_url": "https://gist.github.com/8972289.git",
+  "html_url": "https://gist.github.com/8972289",
+  "files": {
+    "index.html": {
+      "filename": "index.html",
+      "type": "text/html",
+      "language": "HTML",
+      "raw_url": "https://gist.github.com/robinboehm/8972289/raw/3356f6383984ed578cb375c49abacf153946ec64/index.html",
+      "size": 619,
+      "content": "<!DOCTYPE html>\n<html>\n<head>\n    <title></title>\n    <meta charset=\"utf-8\">\n\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"bower_components/jasmine/lib/jasmine-core/jasmine.css\">\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"stylesheets/jasmine.css\">\n</head>\n<body>\n\n\n<script src=\"bower_components/jasmine/lib/jasmine-core/jasmine.js\"></script>\n<script src=\"bower_components/jasmine/lib/jasmine-core/jasmine-html.js\"></script>\n<script src=\"bower_components/jasmine/lib/jasmine-core/boot.js\"></script>\n\n<!-- App -->\n\n<script src=\"primitives.js\"></script>\n<script src=\"primitives.spec.js\"></script>\n</body>\n</html>"
+    },
+    "primitives.js": {
+      "filename": "primitives.js",
+      "type": "application/javascript",
+      "language": "JavaScript",
+      "raw_url": "https://gist.github.com/robinboehm/8972289/raw/7eed1a1f1b9893cd794f35bcbe15d8ff544018a1/primitives.js",
+      "size": 85,
+      "content": "var primitiveNumber = 2;\nvar objectNumber = new Number(3);\nobjectNumber.foo = \"bar\";\n"
+    },
+    "primitives.spec.js": {
+      "filename": "primitives.spec.js",
+      "type": "application/javascript",
+      "language": "JavaScript",
+      "raw_url": "https://gist.github.com/robinboehm/8972289/raw/8f850e347dced7a294fef24a6a3ae8e4ab50bc41/primitives.spec.js",
+      "size": 698,
+      "content": "describe(\"The variable primitiveNumber\", function () {\n  it(\"should be defined\", function () {\n    expect(primitiveNumber).toBeDefined();\n  });\n\n  it(\"should be a primitive number\", function () {\n    expect(typeof primitiveNumber).toBe('number');\n  });\n\n  it(\"should equal the value\", function () {\n    expect(primitiveNumber).toEqual(2);\n  });\n});\n\ndescribe(\"A variable objectNumber\", function () {\n\n  it(\"should be defined\", function () {\n    expect(objectNumber).toBeDefined();\n  });\n\n  it(\"should be a object\", function () {\n    expect(typeof objectNumber).toBe('object');\n  });\n\n  it(\"should not be able to contain properties\", function () {\n    expect(objectNumber.foo).toBe('bar');\n  });\n});"
+    }
+  },
+  "public": true,
+  "created_at": "2014-02-13T09:32:51Z",
+  "updated_at": "2014-02-13T09:33:36Z",
+  "description": "simple js-test",
+  "comments": 0,
+  "user": {
+    "login": "robinboehm",
+    "id": 820391,
+    "avatar_url": "https://gravatar.com/avatar/f11e67e419666df98a1fdbba067de8f6?d=https%3A%2F%2Fidenticons.github.com%2F550d2450c1d85761492ea2419ae36366.png&r=x",
+    "gravatar_id": "f11e67e419666df98a1fdbba067de8f6",
+    "url": "https://api.github.com/users/robinboehm",
+    "html_url": "https://github.com/robinboehm",
+    "followers_url": "https://api.github.com/users/robinboehm/followers",
+    "following_url": "https://api.github.com/users/robinboehm/following{/other_user}",
+    "gists_url": "https://api.github.com/users/robinboehm/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/robinboehm/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/robinboehm/subscriptions",
+    "organizations_url": "https://api.github.com/users/robinboehm/orgs",
+    "repos_url": "https://api.github.com/users/robinboehm/repos",
+    "events_url": "https://api.github.com/users/robinboehm/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/robinboehm/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "comments_url": "https://api.github.com/gists/8972289/comments",
+  "forks": [
+
+  ],
+  "history": [
+    {
+      "user": {
+        "login": "robinboehm",
+        "id": 820391,
+        "avatar_url": "https://gravatar.com/avatar/f11e67e419666df98a1fdbba067de8f6?d=https%3A%2F%2Fidenticons.github.com%2F550d2450c1d85761492ea2419ae36366.png&r=x",
+        "gravatar_id": "f11e67e419666df98a1fdbba067de8f6",
+        "url": "https://api.github.com/users/robinboehm",
+        "html_url": "https://github.com/robinboehm",
+        "followers_url": "https://api.github.com/users/robinboehm/followers",
+        "following_url": "https://api.github.com/users/robinboehm/following{/other_user}",
+        "gists_url": "https://api.github.com/users/robinboehm/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/robinboehm/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/robinboehm/subscriptions",
+        "organizations_url": "https://api.github.com/users/robinboehm/orgs",
+        "repos_url": "https://api.github.com/users/robinboehm/repos",
+        "events_url": "https://api.github.com/users/robinboehm/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/robinboehm/received_events",
+        "type": "User",
+        "site_admin": false
+      },
+      "version": "1319165e79df0e77db4df4e3b1d6972383b1ab75",
+      "committed_at": "2014-02-13T09:33:36Z",
+      "change_status": {
+        "total": 56,
+        "additions": 28,
+        "deletions": 28
+      },
+      "url": "https://api.github.com/gists/8972289/1319165e79df0e77db4df4e3b1d6972383b1ab75"
+    },
+    {
+      "user": {
+        "login": "robinboehm",
+        "id": 820391,
+        "avatar_url": "https://gravatar.com/avatar/f11e67e419666df98a1fdbba067de8f6?d=https%3A%2F%2Fidenticons.github.com%2F550d2450c1d85761492ea2419ae36366.png&r=x",
+        "gravatar_id": "f11e67e419666df98a1fdbba067de8f6",
+        "url": "https://api.github.com/users/robinboehm",
+        "html_url": "https://github.com/robinboehm",
+        "followers_url": "https://api.github.com/users/robinboehm/followers",
+        "following_url": "https://api.github.com/users/robinboehm/following{/other_user}",
+        "gists_url": "https://api.github.com/users/robinboehm/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/robinboehm/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/robinboehm/subscriptions",
+        "organizations_url": "https://api.github.com/users/robinboehm/orgs",
+        "repos_url": "https://api.github.com/users/robinboehm/repos",
+        "events_url": "https://api.github.com/users/robinboehm/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/robinboehm/received_events",
+        "type": "User",
+        "site_admin": false
+      },
+      "version": "c69c8ab9f9c4df415a918090f5e6efc4f4cccbe3",
+      "committed_at": "2014-02-13T09:33:26Z",
+      "change_status": {
+        "total": 6,
+        "additions": 3,
+        "deletions": 3
+      },
+      "url": "https://api.github.com/gists/8972289/c69c8ab9f9c4df415a918090f5e6efc4f4cccbe3"
+    },
+    {
+      "user": {
+        "login": "robinboehm",
+        "id": 820391,
+        "avatar_url": "https://gravatar.com/avatar/f11e67e419666df98a1fdbba067de8f6?d=https%3A%2F%2Fidenticons.github.com%2F550d2450c1d85761492ea2419ae36366.png&r=x",
+        "gravatar_id": "f11e67e419666df98a1fdbba067de8f6",
+        "url": "https://api.github.com/users/robinboehm",
+        "html_url": "https://github.com/robinboehm",
+        "followers_url": "https://api.github.com/users/robinboehm/followers",
+        "following_url": "https://api.github.com/users/robinboehm/following{/other_user}",
+        "gists_url": "https://api.github.com/users/robinboehm/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/robinboehm/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/robinboehm/subscriptions",
+        "organizations_url": "https://api.github.com/users/robinboehm/orgs",
+        "repos_url": "https://api.github.com/users/robinboehm/repos",
+        "events_url": "https://api.github.com/users/robinboehm/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/robinboehm/received_events",
+        "type": "User",
+        "site_admin": false
+      },
+      "version": "90d242fe5d332bfd895d0bf65fb40044366df440",
+      "committed_at": "2014-02-13T09:33:16Z",
+      "change_status": {
+        "total": 44,
+        "additions": 22,
+        "deletions": 22
+      },
+      "url": "https://api.github.com/gists/8972289/90d242fe5d332bfd895d0bf65fb40044366df440"
+    },
+    {
+      "user": {
+        "login": "robinboehm",
+        "id": 820391,
+        "avatar_url": "https://gravatar.com/avatar/f11e67e419666df98a1fdbba067de8f6?d=https%3A%2F%2Fidenticons.github.com%2F550d2450c1d85761492ea2419ae36366.png&r=x",
+        "gravatar_id": "f11e67e419666df98a1fdbba067de8f6",
+        "url": "https://api.github.com/users/robinboehm",
+        "html_url": "https://github.com/robinboehm",
+        "followers_url": "https://api.github.com/users/robinboehm/followers",
+        "following_url": "https://api.github.com/users/robinboehm/following{/other_user}",
+        "gists_url": "https://api.github.com/users/robinboehm/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/robinboehm/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/robinboehm/subscriptions",
+        "organizations_url": "https://api.github.com/users/robinboehm/orgs",
+        "repos_url": "https://api.github.com/users/robinboehm/repos",
+        "events_url": "https://api.github.com/users/robinboehm/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/robinboehm/received_events",
+        "type": "User",
+        "site_admin": false
+      },
+      "version": "613818be2e7a5a5a0ae7ff00dd818862f6a3a09b",
+      "committed_at": "2014-02-13T09:32:51Z",
+      "change_status": {
+        "total": 53,
+        "additions": 53,
+        "deletions": 0
+      },
+      "url": "https://api.github.com/gists/8972289/613818be2e7a5a5a0ae7ff00dd818862f6a3a09b"
+    }
+  ]
+}
