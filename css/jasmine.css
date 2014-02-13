@@ -10,6 +10,7 @@
 }
 .description a{
     color: black !important;
+    line-height: initial !important;
 
 }
 .failures div:not(:first-child){
