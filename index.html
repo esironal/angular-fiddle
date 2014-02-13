@@ -1,9 +1,11 @@
 <html ng-app="fiddleApp">
 <head>
   <title>Angular Fiddle</title>
+    <meta charset="utf-8">
   <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
   <style>.ace_editor { height: 400px; max-width: 100%; }
   </style>
+  <link rel="stylesheet" href="css/layout.css"/>
 </head>
 <body ng-controller="MainCtrl">
 
@@ -18,10 +20,13 @@
       </tab>
     </tabset>
   </div>
-  <div class="col-xs-6">
+  <div class="col-xs-6" ng-click="execute()">
   output
   </div>
 </div>
+
+<iframe id="result"></iframe>
+
 
 
 <script type="text/javascript" src="bower_components/ace-builds/src-min-noconflict/ace.js"></script>
@@ -40,7 +45,44 @@
       $scope.files = res.data.files;
 
     });
-  };
+
+    $http.get('template/iframe.env.html')
+            .then(function(response){
+               $scope.template = response.data;
+            });
+
+    $scope.execute = function(){
+        var scriptContent = $scope.template;
+        document.body.removeChild(document.getElementById('result'));
+
+        var iframe = document.createElement("iframe");
+        iframe.id = "result";
+        document.body.appendChild(iframe);
+
+
+        if(iframe.contentDocument) doc = iframe.contentDocument;
+        else if(iframe.contentWindow) doc = iframe.contentWindow.document;
+        else doc = iframe.document;
+
+
+
+        var jscontent = "";
+        angular.forEach($scope.files,function(file){
+            if(file.language == "JavaScript"){
+                jscontent += file.content;
+            }
+        });
+
+        // TODO: Merge Files in ACE
+        scriptContent = scriptContent.replace("###jscontent###",jscontent);
+
+
+        doc.open();
+        doc.writeln(scriptContent);
+        doc.close();
+    };
+  }
 </script>
+
 </body>
 </html>

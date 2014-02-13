@@ -1,0 +1,7 @@
+.failures div:not(:first-child){
+    display: none;
+}
+
+.html-reporter .stack-trace{
+    display: none;
+}
