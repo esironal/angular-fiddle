@@ -1,50 +1,49 @@
 <html ng-app="fiddleApp">
 <head>
-    <title>Angular Fiddle</title>
+    <title>ngFiddle</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
-    <style>.ace_editor {
-        height: 400px;
-        max-width: 100%;
-    }
-
-    input {
-        width: 500px;
-    }
-
-    iframe{
-        width: 100%;
-        height: 350px;
-    }
-    </style>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body ng-controller="MainCtrl">
-<p>
-    <button ng-click="gistId=8972289">Primitives</button>
-    <button ng-click="gistId=8973753">Strings</button>
-    <button ng-click="gistId=8975840">Booleans</button>
-    <button ng-click="gistId=8976378">Functions</button>
-    <button ng-click="gistId=8977139">Variable References</button>
-    <button ng-click="gistId=8976835">Variable Names</button>
-    <button ng-click="gistId=8978574">Scopes</button>
-</p>
-<p><input type="text" ng-model="gistId" placeholder="ID of your Gist">
-    <button ng-click="fetch()">Fetch</button>
-    <button ng-click="execute()">Execute</button>
-</p>
 
-<div class="row">
+<nav class="navbar navbar-inverse">
+  <a class="navbar-brand" href="#">ngFiddle</a>
+  <ul class="nav navbar-nav">
+    <li ng-class="{active: gistId==8972289}"><a href ng-click="gistId=8972289;fetch()">Primitives</a></li>
+    <li ng-class="{active: gistId==8973753}"><a href ng-click="gistId=8973753;fetch()" ng-class="active: gistId==">Strings</a></li>
+    <li ng-class="{active: gistId==8975840}"><a href ng-click="gistId=8975840;fetch()" ng-class="active: gistId==">Booleans</a></li>
+    <li ng-class="{active: gistId==8976378}"><a href ng-click="gistId=8976378;fetch()" ng-class="active: gistId==">Functions</a></li>
+    <li ng-class="{active: gistId==8977139}"><a href ng-click="gistId=8977139;fetch()" ng-class="active: gistId==">Variable References</a></li>
+    <li ng-class="{active: gistId==8976835}"><a href ng-click="gistId=8976835;fetch()" ng-class="active: gistId==">Variable Names</a></li>
+    <li ng-class="{active: gistId==8978574}"><a href ng-click="gistId=8978574;fetch()" ng-class="active: gistId==">Scopes</a></li>
+  </ul>
+  <form class="navbar-form navbar-right">
+    <div class="form-group">
+      <input type="text" class="form-control" ng-model="gistId" placeholder="ID of your Gist">
+    </div>
+    <button type="submit" class="btn btn-default" ng-click="fetch()">Load!</button>
+  </form>
+</nav>
+
+<div class="editor-wrapper row">
     <div class="col-xs-12">
         <tabset>
             <tab ng-repeat="file in files">
                 <tab-heading ng-bind="file.filename.toLowerCase()"></tab-heading>
-                <div ui-ace="{ mode: file.language.toLowerCase()}" ng-model="file.content"></div>
+                <div ui-ace="{ mode: file.language.toLowerCase(), onLoad: aceLoaded}" ng-model="file.content"></div>
             </tab>
         </tabset>
     </div>
 </div>
 
-<iframe id="result"></iframe>
+<div class="execute-wrapper">
+    <button class="btn btn-info form-control" ng-click="execute()">Run! (Cmd+Enter)</button>
+</div>
+
+<div class="result-wrapper">
+  <iframe id="result"></iframe>
+</div>
 
 <script type="text/javascript" src="bower_components/ace-builds/src-min-noconflict/ace.js"></script>
 <script type="text/javascript" src="bower_components/angular/angular.js"></script>
@@ -55,16 +54,21 @@
     var myAppModule = angular.module('fiddleApp', ['ui.ace', 'ui.bootstrap']);
 
     function MainCtrl($scope, $http) {
-        // https://api.github.com/gists/8961251
+        $scope.aceLoaded = function(editor) {
+          editor.setOptions({ maxLines: Infinity });
+          editor.commands.addCommand({
+              name: "showKeyboardShortcuts",
+              bindKey: {win: "Ctrl-Enter", mac: "Command-Enter"},
+              exec: function(editor) { $scope.execute(); }
+          })
+        };
 
         $scope.fetch = function(){
             $http.get("https://api.github.com/gists/"+$scope.gistId)
             //$http.get("data.json")
-                    .then(function (res) {
-                //$scope.gist_url = res.data.html_url
-                $scope.files = res.data.files;
-
-            });
+                .then(function (res) {
+                   $scope.files = res.data.files;
+                });
         };
         // TODO: Remove
         $scope.fetch();
@@ -78,8 +82,6 @@
             iframe.id = "result";
             currentParentNode.appendChild(iframe);
 
-
-
             if (iframe.contentDocument) doc = iframe.contentDocument;
             else if (iframe.contentWindow) doc = iframe.contentWindow.document;
             else doc = iframe.document;
@@ -91,14 +93,13 @@
             }
 
             var indexhtml = index.content;
-            var Regex = /<script[^>]+src=\"([\w/\\.]*)\"*[^>]*>/g;
+            var Regex = /<script[^>]+src=\"([\w\/\\.]*)\"*[^>]*>/g;
             var results = [],
-                    match;
+
+            match;
             while (match = Regex.exec(indexhtml)) {
                 results.push(match);
             }
-
-
 
             angular.forEach(results, function (result) {
                 var scriptTag = result[0];
@@ -108,17 +109,12 @@
                     var replaceTag = "<script>" + $scope.files[fileName].content;
                     indexhtml = indexhtml.replace(scriptTag, replaceTag);
                 }
-
             });
-
-
 
             doc.open();
             doc.writeln(indexhtml);
             doc.close();
         };
-
-
     }
 </script>
 
