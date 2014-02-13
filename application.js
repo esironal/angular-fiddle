@@ -53,6 +53,7 @@ angular.module('fiddleApp')
             });
         };
         $scope.fetch = function(){
+            $scope.result = '';
             Files.loadGist($scope.gistId).then(function(files) {
                 $scope.files = files;
             });
