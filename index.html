@@ -2,20 +2,27 @@
 <head>
   <title>Angular Fiddle</title>
   <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
-  <style>.ace_editor { height: 200px; }
+  <style>.ace_editor { height: 400px; max-width: 100%; }
   </style>
 </head>
 <body ng-controller="MainCtrl">
 
-<div class="container">
-  <p><input type="text" value="{{gist_url}}" style="width:100%;"></p>
-  <tabset>
-    <tab ng-repeat="file in files">
-      <tab-heading ng-bind="file.filename"></tab-heading>
-      <div ui-ace ng-model="file.content"></div>
-    </tab>
-  </tabset>
+<p><input type="text" value="{{gist_url}}"></p>
+
+<div class="row">
+  <div class="col-xs-6">
+    <tabset>
+      <tab ng-repeat="file in files">
+        <tab-heading ng-bind="file.filename.toLowerCase()"></tab-heading>
+        <div ui-ace="{ mode: file.language.toLowerCase()}" ng-model="file.content"></div>
+      </tab>
+    </tabset>
+  </div>
+  <div class="col-xs-6">
+  output
+  </div>
 </div>
+
 
 <script type="text/javascript" src="bower_components/ace-builds/src-min-noconflict/ace.js"></script>
 <script type="text/javascript" src="bower_components/angular/angular.js"></script>
