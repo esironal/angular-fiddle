@@ -1,25 +1,33 @@
-<html ng-app>
+<html ng-app="fiddleApp">
 <head>
   <title>Angular Fiddle</title>
   <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+  <style>.ace_editor { height: 200px; }
+  </style>
 </head>
 <body ng-controller="MainCtrl">
 
 <div class="container">
-  <input type="text" value="{{gist_url}}" style="width:100%;">
-
-  <div ng-repeat="file in files">
-    <h2 ng-bind="file.filename"></h2>
-    <pre ng-bind="file.content"></pre>
-  </div>
-
+  <p><input type="text" value="{{gist_url}}" style="width:100%;"></p>
+  <tabset>
+    <tab ng-repeat="file in files">
+      <tab-heading ng-bind="file.filename"></tab-heading>
+      <div ui-ace ng-model="file.content"></div>
+    </tab>
+  </tabset>
 </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js"></script>
+<script type="text/javascript" src="bower_components/ace-builds/src-min-noconflict/ace.js"></script>
+<script type="text/javascript" src="bower_components/angular/angular.js"></script>
+<script type="text/javascript" src="bower_components/angular-ui-ace/ui-ace.js"></script>
+<script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+<script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 <script>
-  function MainCtrl($scope, $http){
+  var myAppModule = angular.module('fiddleApp', ['ui.ace', 'ui.bootstrap']);
 
-    $http.get('https://api.github.com/gists/8961251').then(function(res){
+  function MainCtrl($scope, $http){
+    // https://api.github.com/gists/8961251
+    $http.get('demo.json').then(function(res){
       console.log(res.data);
       $scope.gist_url = res.data.html_url
       $scope.files = res.data.files;
