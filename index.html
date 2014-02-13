@@ -11,12 +11,12 @@
   <a class="navbar-brand" href="#">ngFiddle</a>
   <ul class="nav navbar-nav">
     <li ng-class="{active: gistId==8972289}"><a href ng-click="gistId=8972289;fetch()">Primitives</a></li>
-    <li ng-class="{active: gistId==8973753}"><a href ng-click="gistId=8973753;fetch()" ng-class="active: gistId==">Strings</a></li>
-    <li ng-class="{active: gistId==8975840}"><a href ng-click="gistId=8975840;fetch()" ng-class="active: gistId==">Booleans</a></li>
-    <li ng-class="{active: gistId==8976378}"><a href ng-click="gistId=8976378;fetch()" ng-class="active: gistId==">Functions</a></li>
-    <li ng-class="{active: gistId==8977139}"><a href ng-click="gistId=8977139;fetch()" ng-class="active: gistId==">Variable References</a></li>
-    <li ng-class="{active: gistId==8976835}"><a href ng-click="gistId=8976835;fetch()" ng-class="active: gistId==">Variable Names</a></li>
-    <li ng-class="{active: gistId==8978574}"><a href ng-click="gistId=8978574;fetch()" ng-class="active: gistId==">Scopes</a></li>
+    <li ng-class="{active: gistId==8973753}"><a href ng-click="gistId=8973753;fetch()">Strings</a></li>
+    <li ng-class="{active: gistId==8975840}"><a href ng-click="gistId=8975840;fetch()">Booleans</a></li>
+    <li ng-class="{active: gistId==8976378}"><a href ng-click="gistId=8976378;fetch()">Functions</a></li>
+    <li ng-class="{active: gistId==8977139}"><a href ng-click="gistId=8977139;fetch()">Variable References</a></li>
+    <li ng-class="{active: gistId==8976835}"><a href ng-click="gistId=8976835;fetch()">Variable Names</a></li>
+    <li ng-class="{active: gistId==8978574}"><a href ng-click="gistId=8978574;fetch()">Scopes</a></li>
   </ul>
   <form class="navbar-form navbar-right">
     <div class="form-group">
@@ -73,9 +73,19 @@
         // TODO: Remove
         $scope.fetch();
 
+       function mergeFilesIntoIndex(files) {
+            var scriptRegex = /<script[^>]+src=\"([\w\/\\.]*)\"*[^>]*>/g;
+            var index = files['index.html'];
+            if (!index) { throw 'No index.html defined'; }
+            return index.content.replace(scriptRegex, function(match, fileName){
+                return files[fileName] ? '<script>'+files[fileName].content : match;
+            });;
+        }
+
         $scope.execute = function () {
+            // TODO: Move this into a directive
             var currentIframe = document.getElementById('result'),
-                    currentParentNode = currentIframe.parentNode;
+            currentParentNode = currentIframe.parentNode;
             currentIframe.parentNode.removeChild(currentIframe);
 
             var iframe = document.createElement("iframe");
@@ -86,33 +96,8 @@
             else if (iframe.contentWindow) doc = iframe.contentWindow.document;
             else doc = iframe.document;
 
-
-            var index = $scope.files['index.html'];
-            if (!index) {
-                throw "No index.html defined";
-            }
-
-            var indexhtml = index.content;
-            var Regex = /<script[^>]+src=\"([\w\/\\.]*)\"*[^>]*>/g;
-            var results = [],
-
-            match;
-            while (match = Regex.exec(indexhtml)) {
-                results.push(match);
-            }
-
-            angular.forEach(results, function (result) {
-                var scriptTag = result[0];
-                var fileName = result[1];
-
-                if ($scope.files[fileName]) {
-                    var replaceTag = "<script>" + $scope.files[fileName].content;
-                    indexhtml = indexhtml.replace(scriptTag, replaceTag);
-                }
-            });
-
             doc.open();
-            doc.writeln(indexhtml);
+            doc.writeln(mergeFilesIntoIndex($scope.files));
             doc.close();
         };
     }
