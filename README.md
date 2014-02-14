@@ -5,7 +5,7 @@ Just a simple demo, how you could build sth. like JSFiddle with really low effor
 
 ### Demo
 
-Try it here: [http://sbrink.github.io/angular-fiddle/](http://sbrink.github.io/angular-fiddle/)
+Try it here: [http://fiddle.angularjs.de](http://fiddle.angularjs.de)
 
 ### You can
 
