@@ -1,12 +1,9 @@
-angular.module('fiddleApp', ['ui.ace', 'ui.bootstrap', 'angulartics', 'angulartics.google.analytics']);
+angular.module('fiddleApp', ['ui.ace', 'ui.bootstrap']);
 
 angular.module('fiddleApp')
     .factory('Gist', function($http) {
         function get(gistId) {
-          if(angular.isUndefined(gistId)){
-            gistId = "9005905"; // readme gist
-          }
-            return $http.get('https://api.github.com/gists/'+gistId)
+            return $http.get(gistId ? 'https://api.github.com/gists/'+ gistId : 'demo.json')
                 .then(function (res) { return res.data.files; });
         }
         return { get: get };
@@ -60,8 +57,10 @@ angular.module('fiddleApp')
             $scope.result = undefined;
             Gist.get($scope.gistId).then(function(files) {
                 $scope.files = files;
+                $scope.execute();
             });
         };
+        $scope.fetch('9005905'); // Demo gist
         $scope.execute = function () {
             $scope.result = Files.mergeIndexHtml($scope.files);
         };
