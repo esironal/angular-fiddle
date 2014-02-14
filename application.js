@@ -53,9 +53,9 @@ angular.module('fiddleApp')
                 exec: function(editor) { $scope.execute(); }
             });
         };
-        $scope.fetch = function(){
+        $scope.fetch = function(gistId){
             $scope.result = undefined;
-            Gist.get($scope.gistId).then(function(files) {
+            Gist.get(gistId || $scope.gistId).then(function(files) {
                 $scope.files = files;
                 $scope.execute();
             });
