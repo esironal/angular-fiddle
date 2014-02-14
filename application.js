@@ -1,4 +1,4 @@
-angular.module('fiddleApp', ['ui.ace', 'ui.bootstrap']);
+angular.module('fiddleApp', ['ui.ace', 'ui.bootstrap', 'angulartics', 'angulartics.google.analytics']);
 
 angular.module('fiddleApp')
     .factory('Gist', function($http) {

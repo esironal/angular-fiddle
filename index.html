@@ -10,19 +10,19 @@
 <nav class="navbar navbar-inverse">
   <a class="navbar-brand" href="#">ngFiddle</a>
   <ul class="nav navbar-nav">
-    <li ng-class="{active: gistId==8972289}"><a href ng-click="gistId=8972289;fetch()">Primitives</a></li>
-    <li ng-class="{active: gistId==8973753}"><a href ng-click="gistId=8973753;fetch()">Strings</a></li>
-    <li ng-class="{active: gistId==8975840}"><a href ng-click="gistId=8975840;fetch()">Booleans</a></li>
-    <li ng-class="{active: gistId==8976378}"><a href ng-click="gistId=8976378;fetch()">Functions</a></li>
-    <li ng-class="{active: gistId==8977139}"><a href ng-click="gistId=8977139;fetch()">Variable References</a></li>
-    <li ng-class="{active: gistId==8976835}"><a href ng-click="gistId=8976835;fetch()">Variable Names</a></li>
-    <li ng-class="{active: gistId==8978574}"><a href ng-click="gistId=8978574;fetch()">Scopes</a></li>
+    <li ng-class="{active: gistId==8972289}"><a href ng-click="gistId=8972289;fetch()" analytics-on="click">Primitives</a></li>
+    <li ng-class="{active: gistId==8973753}"><a href ng-click="gistId=8973753;fetch()" analytics-on="click">Strings</a></li>
+    <li ng-class="{active: gistId==8975840}"><a href ng-click="gistId=8975840;fetch()" analytics-on="click">Booleans</a></li>
+    <li ng-class="{active: gistId==8976378}"><a href ng-click="gistId=8976378;fetch()" analytics-on="click">Functions</a></li>
+    <li ng-class="{active: gistId==8977139}"><a href ng-click="gistId=8977139;fetch()" analytics-on="click">Variable References</a></li>
+    <li ng-class="{active: gistId==8976835}"><a href ng-click="gistId=8976835;fetch()" analytics-on="click">Variable Names</a></li>
+    <li ng-class="{active: gistId==8978574}"><a href ng-click="gistId=8978574;fetch()" analytics-on="click">Scopes</a></li>
   </ul>
   <form class="navbar-form navbar-right">
     <div class="form-group">
       <input type="text" class="form-control" ng-model="gistId" placeholder="ID of your Gist">
     </div>
-    <button type="submit" class="btn btn-default" ng-click="fetch()">Load!</button>
+    <button type="submit" class="btn btn-default" ng-click="fetch()" analytics-on="click" analytics-event="Load-Gist-{{gistId}}">Load!</button>
   </form>
 </nav>
 
@@ -38,18 +38,26 @@
 </div>
 
 <div class="execute-wrapper">
-    <button class="btn btn-info form-control" ng-click="execute()" ng-disabled="!files">Run! (Cmd+Enter)</button>
+    <button class="btn btn-info form-control" ng-click="execute()" ng-disabled="!files" analytics-on="click" analytics-event="Run">Run! (Cmd+Enter)</button>
 </div>
 
 <div class="result-wrapper">
   <iframe-result content="result"></iframe-result>
 </div>
-
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-39010393-2', { 'cookieDomain': 'none' });
+</script>
 <script type="text/javascript" src="bower_components/ace-builds/src-min-noconflict/ace.js"></script>
 <script type="text/javascript" src="bower_components/angular/angular.js"></script>
 <script type="text/javascript" src="bower_components/angular-ui-ace/ui-ace.js"></script>
 <script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
 <script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script type="text/javascript" src="bower_components/angulartics/dist/angulartics.min.js"></script>
+<script type="text/javascript" src="bower_components/angulartics/dist/angulartics-google-analytics.min.js"></script>
 <script type="text/javascript" src="application.js"></script>
 </body>
 </html>
