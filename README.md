@@ -20,3 +20,7 @@ Try it here: [http://fiddle.angularjs.de](http://fiddle.angularjs.de)
 * [Bootstrap](http://getbootstrap.com/)
 
 The JavaScript part is only about 70 lines long.
+
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/angularjs-de/angular-fiddle/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
