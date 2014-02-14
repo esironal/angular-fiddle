@@ -1,17 +1,17 @@
 angular.module('fiddleApp', ['ui.ace', 'ui.bootstrap']);
 
 angular.module('fiddleApp')
-    .factory('Files', function($http) {
-        var files;
-        var loadGist = function(gistId) {
-            //return $http.get("data.json")
-            return $http.get("https://api.github.com/gists/"+gistId)
-                .then(function (res) {
-                    files = res.data.files;
-                    return files;
-                });
-        };
-        var mergedIndexHtml = function() {
+    .factory('Gist', function($http) {
+        function get(gistId) {
+            return $http.get(gistId ? 'https://api.github.com/gists/'+gistId : 'demo.json')
+                .then(function (res) { return res.data.files; });
+        }
+        return { get: get };
+    });
+
+angular.module('fiddleApp')
+    .factory('Files', function() {
+        var mergeIndexHtml = function(files) {
             var scriptRegex = /<script[^>]+src=\"([\w\/\\.]*)\"*[^>]*>/g;
             var index = files['index.html'];
             if (!index) { throw 'No index.html defined'; }
@@ -19,11 +19,10 @@ angular.module('fiddleApp')
                 return files[fileName] ? '<script>'+files[fileName].content : match;
             });
         };
-        return {
-          loadGist: loadGist,
-          mergedIndexHtml: mergedIndexHtml
-        };
-    })
+        return { mergeIndexHtml: mergeIndexHtml };
+    });
+
+angular.module('fiddleApp')
     .directive('iframeResult', function() {
         return {
             restrict: 'E',
@@ -44,8 +43,10 @@ angular.module('fiddleApp')
                 });
             }
         };
-    })
-    .controller('MainCtrl', function($scope, Files) {
+    });
+
+angular.module('fiddleApp')
+    .controller('MainCtrl', function($scope, Files, Gist) {
         $scope.aceLoaded = function(editor) {
             editor.commands.addCommand({
                 bindKey: { win: 'Ctrl-Enter', mac: 'Command-Enter' },
@@ -53,12 +54,12 @@ angular.module('fiddleApp')
             });
         };
         $scope.fetch = function(){
-            $scope.result = '';
-            Files.loadGist($scope.gistId).then(function(files) {
+            $scope.result = undefined;
+            Gist.get($scope.gistId).then(function(files) {
                 $scope.files = files;
             });
         };
         $scope.execute = function () {
-            $scope.result = Files.mergedIndexHtml();
+            $scope.result = Files.mergeIndexHtml($scope.files);
         };
     });
