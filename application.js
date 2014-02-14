@@ -3,7 +3,10 @@ angular.module('fiddleApp', ['ui.ace', 'ui.bootstrap', 'angulartics', 'angularti
 angular.module('fiddleApp')
     .factory('Gist', function($http) {
         function get(gistId) {
-            return $http.get(gistId ? 'https://api.github.com/gists/'+gistId : 'demo.json')
+          if(angular.isUndefined(gistId)){
+            gistId = "9005905"; // readme gist
+          }
+            return $http.get('https://api.github.com/gists/'+gistId)
                 .then(function (res) { return res.data.files; });
         }
         return { get: get };
