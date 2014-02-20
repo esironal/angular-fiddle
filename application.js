@@ -46,7 +46,7 @@ angular.module('fiddleApp')
     });
 
 angular.module('fiddleApp')
-    .controller('MainCtrl', function($scope, Files, Gist) {
+    .controller('MainCtrl', function($scope, $location, Files, Gist) {
         $scope.aceLoaded = function(editor) {
             editor.commands.addCommand({
                 bindKey: { win: 'Ctrl-Enter', mac: 'Command-Enter' },
@@ -60,7 +60,7 @@ angular.module('fiddleApp')
                 $scope.execute();
             });
         };
-        $scope.fetch('9005905'); // Demo gist
+        $scope.fetch($location.path().split('/').slice(-1)[0] || '9005905'); // Demo gist
         $scope.execute = function () {
             $scope.result = Files.mergeIndexHtml($scope.files);
         };
