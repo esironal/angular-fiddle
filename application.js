@@ -63,12 +63,13 @@ angular.module('fiddleApp')
     $scope.fetch($location.path().split('/').slice(-1)[0] || '9005905'); // Demo gist
     $scope.execute = function () {
       $scope.result = Files.mergeIndexHtml($scope.files);
-      setTimeout(function() { removeLink(); }, 500);
+      setTimeout(function() { preventDataLoose(); }, 500);
     };
 
-    function removeLink() {
+    function preventDataLoose() {
       var iframe = document.getElementById('result');
       var resDoc = iframe.contentDocument || iframe.contentWindow.document;
+      resDoc.onkeydown = function (e) { return preventBackspace(e); };
       var details = resDoc.getElementsByClassName('spec-detail');
       for (i = 0; i < details.length; i++) {
         var descriptions = details[i].getElementsByClassName('description');
@@ -79,3 +80,16 @@ angular.module('fiddleApp')
       }
     }
   });
+
+var preventBackspace = function preventBackspace(e) {
+  if (!e) { e = window.event; }
+  if (e.keyCode == 8) { return false; }
+  return true;
+};
+
+document.addEventListener('DOMContentLoaded', function() {
+  var iframe = document.getElementById('result');
+  var resDoc = iframe.contentDocument || iframe.contentWindow.document;
+  resDoc.onkeydown = function (e) { return preventBackspace(e); };
+  document.onkeydown = function (e) { return preventBackspace(e); };
+});

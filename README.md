@@ -19,7 +19,7 @@ Try it here: [http://fiddle.angularjs.de](http://fiddle.angularjs.de)
 * [Ace Editor](http://ace.c9.io)
 * [Bootstrap](http://getbootstrap.com/)
 
-The JavaScript part is only about 70 lines long.
+The relevant JavaScript part is only about 70 lines long.
 
 
 
