@@ -3,7 +3,7 @@ angular.module('fiddleApp', ['ui.ace', 'ui.bootstrap']);
 angular.module('fiddleApp')
   .factory('Gist', function($http) {
     function get(gistId) {
-      return $http.get(gistId ? 'https://api.github.com/gists/'+ gistId : 'demo.json')
+      return $http.get(gistId ? 'https://api.github.com/gists/'+ gistId : 'demo.json', {cache: true})
         .then(function (res) { return res.data.files; });
     }
     return { get: get };
