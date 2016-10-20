@@ -5,7 +5,7 @@ Just a simple demo, how you could build sth. like JSFiddle with really low effor
 
 ### Demo
 
-Try it here: [http://fiddle.angularjs.de](http://fiddle.angularjs.de)
+Try it here: [http://esironal.github.io/angular-fiddle](http://esironal.github.io/angular-fiddle)
 
 ### You can
 
@@ -23,4 +23,3 @@ The relevant JavaScript part is only about 70 lines long.
 
 
 
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/angularjs-de/angular-fiddle/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
